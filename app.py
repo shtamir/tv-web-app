@@ -1,7 +1,13 @@
 from flask import Flask, render_template
 import datetime
-from google_api import get_sheet_data, get_shared_album_photos, authenticate_google_photos, list_albums, get_media_items_in_album
+from google_api import get_sheet_data, get_shared_album_photos, authenticate_google_photos, list_albums, get_media_items_in_album, get_album_photos
+from weather import get_weather
+from news import get_news_feed
 
+GOOGLE_ALBUM_ID = 'ABtMPp1Yjne0Jf6STId2gWrA_lpqotcRTBAvn6gdEqLqEVcHT2VmfkDOFe02FI4sPfNNcO48CNK8'
+YNET_RSS_LINK = 'https://www.ynet.co.il/Integration/StoryRss1854.xml'
+WALLA_RSS_LINK = 'https://rss.walla.co.il/feed/22'
+RSS_LINK = YNET_RSS_LINK
 
 app = Flask(__name__)
 
@@ -20,56 +26,26 @@ def index():
     todos = [todo[0] for todo in todos if todo]
 
     # Inside index() function
-    ## photos = get_shared_album_photos('AF1QipPX6rR7jKeOSwnoMXmHxfdkfVFBAejFvMFpQdug')
+    ## photos = get_shared_album_photos(GOOGLE_ALBUM_ID)
+    photos = get_album_photos(GOOGLE_ALBUM_ID)
+    print(f'photos:{photos}')
 
-    # ===========================
-    # test start
-    # ===========================
-     # Authenticate and build the service
-    service = authenticate_google_photos()
+    weather = get_weather(city_id=294801, api_key='94fa85a6340b977f219b230f30fdf4b5')
+    print(f'weather: {weather}')
 
-    # Step 1: List all albums
-    print("Fetching your albums...")
-    albums = list_albums(service)
-    if not albums:
-        print("No albums available.")
-        return
+    # News breaks
+    news_feed = get_news_feed(RSS_LINK)
+    #print(f'news_feed:{news_feed}')
 
-    print("\nYour Albums:")
-    for idx, album in enumerate(albums, start=1):
-        print(f"{idx}. {album['title']} (ID: {album['id']})")
-
-    # Step 2: Specify the album you want to access
-    #target_album_title = input("\nEnter the exact name of the album you want to access: ").strip()
-    #album_id = find_album_id(albums, target_album_title)
-
-    album_id = 'ABtMPp1Yjne0Jf6STId2gWrA_lpqotcRTBAvn6gdEqLqEVcHT2VmfkDOFe02FI4sPfNNcO48CNK8'
-
-    #if not album_id:
-    #    print(f"Album titled '{target_album_title}' not found.")
-    #    return
-
-    #print(f"\nAccessing Album: {target_album_title} (ID: {album_id})")
-
-    # Step 3: Retrieve media items from the specified album
-    media_items = get_media_items_in_album(service, album_id)
-    photos = []
-    if media_items:
-        #print(f"\nMedia Items in '{target_album_title}':")
-        for item in media_items:
-            filename = item.get('filename')
-            base_url = item.get('baseUrl')
-            media_type = item.get('mimeType')
-            #print(f"Filename: {filename}, Type: {media_type}, URL: {base_url}=w2048-h1024")
-            photos.append(base_url)
-    else:
-        print("No media items found in the specified album.")
-
-    # ===========================
-    # test end
-    # ===========================
-
-    return render_template('index.html', time=time, date=date, messages=messages, todos=todos, photos=photos)
+    return render_template('index.html', 
+                           time=time, 
+                           date=date, 
+                           messages=messages, 
+                           todos=todos, 
+                           photos=photos, 
+                           weather=weather, 
+                           news_feed=news_feed
+                           )
 
 if __name__ == '__main__':
     app.run(debug=True)

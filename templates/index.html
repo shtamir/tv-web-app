@@ -29,9 +29,27 @@
         {% endfor %}
     </div>
 
-    <div id="weather-forecast"></div>
+    <div id="weather-forecast">
+        <h2 dir="rtl">תחזית להיום</h2>
+        <p dir="rtl">
+            {{weather.city}}</br>
+            {{ weather.temperature }}°C</br> 
+            ({{ weather.humidity}}%)</br>
+            {{ weather.description}}
+        </p>
+    </div>
+    
 
-    <div id="news-breaks"></div>
+    <div id="news-breaks">
+        <h2>Latest News</h2>
+        <ul>
+            {% for news in news_feed %}
+                <!--<li><a href="{{ news.link }}">{{ news.title }}</a></li>-->
+                <li>[{{ news.time }}]: {{ news.title }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
 
     <div id="todo-list">
         <h2>To-Do List</h2>

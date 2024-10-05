@@ -230,3 +230,38 @@ def get_media_items_in_album(service, album_id, page_size=50):
             break
 
     return media_items
+
+
+def get_album_photos(album_id):
+     # Authenticate and build the service
+    service = authenticate_google_photos()
+
+    # Step 1: List all albums
+    print("Fetching your albums...")
+    albums = list_albums(service)
+    if not albums:
+        print("No albums available.")
+        return 0
+
+    print("\nYour Albums:")
+    for idx, album in enumerate(albums, start=1):
+        print(f"{idx}. {album['title']} (ID: {album['id']})")
+
+    # Step 2: Specify the album you want to access
+    #target_album_title = input("\nEnter the exact name of the album you want to access: ").strip()
+    #album_id = find_album_id(albums, target_album_title)
+
+    # Step 2: Retrieve media items from the specified album
+    media_items = get_media_items_in_album(service, album_id)
+    photos = []
+    if media_items:
+        for item in media_items:
+            filename = item.get('filename')
+            base_url = item.get('baseUrl')
+            media_type = item.get('mimeType')
+            #print(f"Filename: {filename}, Type: {media_type}, URL: {base_url}=w2048-h1024")
+            photos.append(base_url)
+        return photos
+    else:
+        print("No media items found in the specified album.")
+        return 0

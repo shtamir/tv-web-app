@@ -9,3 +9,7 @@ service_account_credentials.json
 
 # ignore python virtual env 
 venv
+
+# ignore temporary folders
+__pycache__/
+review_before_delete/
