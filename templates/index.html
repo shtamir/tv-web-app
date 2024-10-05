@@ -22,8 +22,13 @@
         </ul>
     </div>
     
-    <div id="team-photos"></div>
-    
+    <div id="team-photos">
+        <h2>Team Photos</h2>
+        {% for photo in photos %}
+            <img src="{{ photo }}" alt="Yakinton 46 Photo" style="max-width:100%; height:auto;">
+        {% endfor %}
+    </div>
+
     <div id="weather-forecast"></div>
 
     <div id="news-breaks"></div>
