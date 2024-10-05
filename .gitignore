@@ -5,6 +5,7 @@ dist/
 # ignore credentials and tokens
 credentials.json
 google_sheets_id.txt
+service_account_credentials.json
 
 # ignore python virtual env 
 venv

@@ -13,10 +13,29 @@
         <h3>{{ date }}</h3>
     </div>
     
-    <div id="team-messages"></div>
+    <div id="team-messages">
+        <h2>Team Messages</h2>
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
     <div id="team-photos"></div>
+    
     <div id="weather-forecast"></div>
+
     <div id="news-breaks"></div>
-    <div id="todo-list"></div>
+
+    <div id="todo-list">
+        <h2>To-Do List</h2>
+        <ul>
+            {% for todo in todos %}
+                <li>{{ todo }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
 </body>
 </html>
