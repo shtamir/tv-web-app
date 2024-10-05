@@ -1,0 +1,77 @@
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+
+### REMOVE BEFORE COMMIT ###
+!!! This section will be auto removed from the commit !!! (/.git/hooks/commit-msg script) 
+
+Explanation
+
+Type: Specifies the nature of the commit. Common types include:
+	feat: A new feature
+	fix: A bug fix
+	docs: Documentation changes
+	style: Code style changes (formatting, missing semi-colons, etc.)
+	refactor: Code refactoring without changing functionality
+	test: Adding or updating tests
+	chore: Maintenance tasks (build process, dependency updates, etc.)
+Scope: Optional. Specifies the part of the codebase affected by the commit (e.g., api, ui, core).
+
+Subject: A brief summary of the changes (50 characters or less). Use the imperative mood (e.g., “Add”, “Fix”, “Update”).
+
+Body: A more detailed explanation of the changes, wrapped at 72 characters. Explain what and why, not how.
+
+Footer: Optional. Can include references to issues or breaking changes.
+
+### REMOVE BEFORE COMMIT ###
+
+
+### Example Templates
+
+1. **Feature Addition**:
+   feat(ui): add dark mode toggle
+
+   Implemented a dark mode toggle in the settings menu.
+   Users can now switch between light and dark themes.
+
+   Closes #42
+
+2. **Bug Fix**:
+   fix(auth): resolve login issue on mobile
+
+   Fixed a bug where users could not log in on mobile devices
+   due to a missing input field validation.
+
+   Fixes #101
+
+3. **Documentation Update**:
+   docs(readme): update installation instructions
+
+   Updated the installation instructions to include steps
+   for setting up the project on Windows and macOS.
+
+4. **Code Refactoring**:
+   refactor(api): simplify request handling
+
+   Refactored the request handling logic to reduce code
+   duplication and improve readability.
+
+5. **Style Changes**:
+   style(css): improve button styling
+
+   Updated the button styles to match the new design guidelines.
+   Adjusted padding, colors, and hover effects.
+
+6. **Test Addition/Update**:
+   test(auth): add unit tests for login function
+
+   Added unit tests for the login function to ensure it handles
+   various edge cases correctly.
+
+7. **Chore/Maintenance**:
+   chore(deps): update dependencies
+
+   Updated project dependencies to their latest versions.
+
