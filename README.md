@@ -1,4 +1,8 @@
-Sure! I'd be happy to guide you through creating a new web project in Visual Studio Code (VSCode) and setting it up with a new GitHub repository. This step-by-step guide covers everything from setting up your environment to pushing your initial code to GitHub.
+# IMPORTANT
+** How to restore python's venv installations from file:
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+pip install -r requirements.txt
 
 ---
 
